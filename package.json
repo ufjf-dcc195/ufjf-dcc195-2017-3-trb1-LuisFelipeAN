@@ -1,0 +1,23 @@
+{
+  "name": "trabalho_lab_web",
+  "version": "1.0.0",
+  "description": "Primeiro trabalho da disciplina de laboratorio de programacao web 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufjf-dcc195/ufjf-dcc195-2017-3-trb1-LuisFelipeAN.git"
+  },
+  "keywords": [
+    "trabalho1labweb3"
+  ],
+  "author": "Luis Felipe de Almeida Nascimento",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ufjf-dcc195/ufjf-dcc195-2017-3-trb1-LuisFelipeAN/issues"
+  },
+  "homepage": "https://github.com/ufjf-dcc195/ufjf-dcc195-2017-3-trb1-LuisFelipeAN#readme"
+}
