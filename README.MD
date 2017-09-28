@@ -4,8 +4,6 @@ Utilize apenas os módulos do core;
 
 - [x] Crie uma estrutura de roteamento e tratadores de requisição para toda a aplicação conforme o material;
 - [x] Adicione um ponto de entrada para “/index.html” e “/” com uma lista de endereços para as demais questões;
-- [x] Adicione um ponto de entrada para “/index.html” e “/” com uma lista de endereços para as demais questões;
-- [x] Adicione um ponto de entrada para “/index.html” e “/” com uma lista de endereços para as demais questões;
 - [x] Adicione um ponto de entrada para “/sobre.html” com uma página contendo seus dados como nome completo, número de matrícula, e-mail e curso;
 - [x] Adicione um ponto de entrada para “/aleatorios.html” com uma página que apresenta 100 números aleatórios, separados em duas listas não ordenadas com uma para números pares e outra para números ímpares;
 - [x] Adicione um ponto de entrada para “/aleatorios.html” com uma página que apresenta 100 números aleatórios, separados em duas listas não ordenadas com uma para números pares e outra para números ímpares;
