@@ -11,6 +11,6 @@ handlers["/aleatorios.html"] = requestHandlers.aleatorios
 handlers["/primos.html"] = requestHandlers.primos
 handlers["/equacao.html"] = requestHandlers.equacao
 handlers["/xadrez.html"] = requestHandlers.xadrez
-
+handlers["/xadrez.json"] = requestHandlers.xadrezApp
 
 servidor.iniciaServidor(roteador.calculaRota,handlers)

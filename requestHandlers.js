@@ -16,7 +16,7 @@ function listaEnderecos(requisicao,resposta){
   resposta.write("<a href=\"primos.html?n1=0&n2=100\">Numeros Primos entre [0,100]</a><br>")
   resposta.write("<a href=\"equacao.html\">Equacao</a><br>")
   resposta.write("<a href=\"xadrez.html\">Xadrez</a><br>")
-//  resposta.write("<a href=\"xadrez.json\">Aplicacao de xadres</a><br>")
+  resposta.write("<a href=\"xadrez.json\">Aplicacao de xadres</a><br>")
 
   resposta.end();
 
@@ -58,10 +58,9 @@ function numerosAleatorios(requisicao,resposta){
   resposta.end()
 }
 
-function numerosPrimos(requisicao,resposta){
+function numerosPrimos(requisicao,resposta,parametros){
   resposta.writeHead(200,{'Content-Type': 'text/html'})
   resposta.write("<h1>Numeros Primos </h1>")
-  var parametros = querystring.parse(requisicao.url.split("?")[1])
   if((parametros.n1 < parametros.n2) & (parametros.n2 <= 100)){
     resposta.write("<h2>Lista Primos Entre: ["+parametros.n1+", "+parametros.n2+"]</h2><ol>")
     for (var i = parametros.n1; i <= parametros.n2; i++){
@@ -119,25 +118,18 @@ function equacao(requisicao,resposta){
           });
     }
 }
-function xadrez(requisicao,resposta){
-  var cols = [];
-  var rows= 8;
-  for (var i  = 0; i < rows; i++){
-     cols[i] = [];
-     for (var j = 0; j < rows; j++){
-        cols[i][j]=0;
-     }
-  }
+function desenhaTabuleiro(matriz,resposta){
   resposta.writeHead(200,{'Content-Type': 'text/html'})
   resposta.write("<head><style>");
   resposta.write("#black {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #000; color: #FFF}");
   resposta.write("#white {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #FFF; color: #000}");
   resposta.write("</style></head>");
   resposta.write("<h1> Xadrez </h1>");
-  resposta.write("<table>");
-  cols[3][4] = 1;
+
   var peca="";
   var controle = -1;
+
+  resposta.write("<table>");
   resposta.write("<tr>");
   resposta.write("<td></td>");
   for (var l = 0; l < 8; l++) {
@@ -155,8 +147,9 @@ function xadrez(requisicao,resposta){
     resposta.write(""+l);
     resposta.write("</td>");
     for (var c = 0; c < 8; c++) {
-      if(cols[l][c]==1) peca = "&#9816";
-      else  peca = "";
+      if(matriz[l][c]==0) peca = "";
+      if (matriz[l][c]==2) peca = "&#9974";
+      if (matriz[l][c]==1) peca = "&#9816";
       resposta.write("<td>");
       if(controle>0) resposta.write("<div id=\"black\">"+peca+"</div>");
       else resposta.write("<div id=\"white\">"+peca+"</div>");
@@ -169,10 +162,41 @@ function xadrez(requisicao,resposta){
   resposta.write("</table>");
   resposta.end()
 }
+function xadrez(requisicao,resposta,parametros){
+  var matriz = [];
+  var rows   = 8;
+  for (var i  = 0; i < rows; i++){
+     matriz[i] = [];
+     for (var j = 0; j < rows; j++){
+        matriz[i][j]=0;
+     }
+  }
+
+  if(parametros.linha&&parametros.coluna){
+    var linha =   parseInt(parametros.linha);
+    var coluna = parseInt(parametros.coluna);
+    if(linha<8&&coluna<8){
+        matriz[linha][coluna]=1;
+        if(linha+2<8 &&coluna+1<8 )  matriz[linha+2][coluna+1]=2;
+        if(linha+2<8 &&coluna-1>=0)  matriz[linha+2][coluna-1]=2;
+        if(linha-2>=0&&coluna+1<8)  matriz[linha-2][coluna+1]=2;
+        if(linha-2>=0&&coluna-1>=0)  matriz[linha-2][coluna-1]=2;
+        if(linha+1<8 &&coluna+2<8 )  matriz[linha+1][coluna+2]=2;
+        if(linha+1<8 &&coluna-2>=0)  matriz[linha+1][coluna-2]=2;
+        if(linha-1>=0&&coluna+2<8 )  matriz[linha-1][coluna+2]=2;
+        if(linha-1>=0&&coluna-2>=0)  matriz[linha-1][coluna-2]=2;
+
+    }
+    desenhaTabuleiro(matriz,resposta);
+  }
+  else{
+    desenhaTabuleiro(matriz,resposta);
+  }
+}
 function xadrezAplicacao(requisicao,resposta){
+
   resposta.writeHead(200,{'Content-Type': 'text/html'})
   resposta.write("<h1> Aplicacao de Xadrez </h1><br>")
-
   resposta.end()
 }
 
