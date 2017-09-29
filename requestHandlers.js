@@ -79,7 +79,7 @@ function numerosPrimos(requisicao,resposta){
     }
     resposta.write("</ol>")
   }else{resposta.write("Parametros  n1 e n2 incorretos Tente novamente")}
-  resposta.end()
+  resposta.end();
 }
 
 function equacao(requisicao,resposta){
@@ -90,7 +90,7 @@ function equacao(requisicao,resposta){
                 body +=data;
             });
             requisicao.on('end',function(){
-                var POST=  querystring.parse(body)
+                var POST =  querystring.parse(body)
                 var a = parseFloat(POST.a)
                 var b = parseFloat(POST.b)
                 var c = parseFloat(POST.c)
@@ -120,13 +120,58 @@ function equacao(requisicao,resposta){
     }
 }
 function xadrez(requisicao,resposta){
+  var cols = [];
+  var rows= 8;
+  for (var i  = 0; i < rows; i++){
+     cols[i] = [];
+     for (var j = 0; j < rows; j++){
+        cols[i][j]=0;
+     }
+  }
   resposta.writeHead(200,{'Content-Type': 'text/html'})
-  resposta.write("<h1>Xadrez</h1><br>")
+  resposta.write("<head><style>");
+  resposta.write("#black {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #000; color: #FFF}");
+  resposta.write("#white {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #FFF; color: #000}");
+  resposta.write("</style></head>");
+  resposta.write("<h1> Xadrez </h1>");
+  resposta.write("<table>");
+  cols[3][4] = 1;
+  var peca="";
+  var controle = -1;
+  resposta.write("<tr>");
+  resposta.write("<td></td>");
+  for (var l = 0; l < 8; l++) {
+    resposta.write("<td align=\"center\">");
+    resposta.write(""+l);
+    resposta.write("</td>");
+  }
+  resposta.write("</td>");
+
+  resposta.write("<tr>");
+  for (var l = 0; l < 8; l++) {
+    controle=controle*-1;
+    resposta.write("<tr>");
+    resposta.write("<td>");
+    resposta.write(""+l);
+    resposta.write("</td>");
+    for (var c = 0; c < 8; c++) {
+      if(cols[l][c]==1) peca = "&#9816";
+      else  peca = "";
+      resposta.write("<td>");
+      if(controle>0) resposta.write("<div id=\"black\">"+peca+"</div>");
+      else resposta.write("<div id=\"white\">"+peca+"</div>");
+
+      resposta.write("</td>");
+      controle=controle*-1;
+    }
+    resposta.write("</tr>");
+  }
+  resposta.write("</table>");
   resposta.end()
 }
 function xadrezAplicacao(requisicao,resposta){
   resposta.writeHead(200,{'Content-Type': 'text/html'})
-  resposta.write("<h1>Aplicacao de Xadrez</h1><br>")
+  resposta.write("<h1> Aplicacao de Xadrez </h1><br>")
 
   resposta.end()
 }
