@@ -121,7 +121,7 @@ function equacao(requisicao,resposta){
 function desenhaTabuleiro(matriz,resposta){
   resposta.writeHead(200,{'Content-Type': 'text/html'})
   resposta.write("<head><style>");
-  resposta.write("#black {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #000; color: #FFF}");
+  resposta.write("#black {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #888; color: #000}");
   resposta.write("#white {font-size: 3em; border:3px solid  black; width: 70px; height: 70px; text-align: center;  background: #FFF; color: #000}");
   resposta.write("</style></head>");
   resposta.write("<h1> Xadrez </h1>");
